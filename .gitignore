@@ -52,3 +52,7 @@ models/*.joblib
 # Pre-commit
 .pre-commit-cache/
 notebooks/
+models/
+notebooks/models/
+*.onnx
+*.pkl
