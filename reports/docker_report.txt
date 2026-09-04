@@ -1,0 +1,146 @@
+Docker Build Report
+===================
+
+1. Multi-Stage Docker Build
+---------------------------
+
+Dockerfile:
+docker/Dockerfile
+
+The Dockerfile uses a multi-stage build with two stages.
+
+Builder stage:
+- Uses python:3.11-slim.
+- Copies pyproject.toml and src/.
+- Installs the application and its dependencies.
+
+Runtime stage:
+- Uses a clean python:3.11-slim image.
+- Copies the installed dependencies from the builder stage.
+- Copies the application source code.
+- Runs the API using Uvicorn.
+- Exposes port 8000.
+- Runs the application as the non-root user appuser.
+- Includes a Docker health check for /health.
+
+2. .dockerignore
+----------------
+
+The .dockerignore file excludes unnecessary files from the Docker build
+context:
+
+.git
+.venv
+notebooks/
+data/
+tests/
+__pycache__/
+*.ipynb
+
+Additional exclusions:
+
+.pytest_cache/
+.coverage
+.mypy_cache/
+.DS_Store
+*.pyc
+*.pyo
+
+3. Docker Image Size Comparison
+-------------------------------
+
+Image built WITH .dockerignore:
+
+Image tag: prodml-api:with-ignore
+Image size: 1.07 GB
+
+Image built WITHOUT .dockerignore:
+
+Image tag: prodml-api:without-ignore
+Image size: 1.07 GB
+
+Size difference:
+
+0 GB
+
+4. Observation
+--------------
+
+The .dockerignore file prevents unnecessary development files, datasets,
+notebooks, tests, virtual environments, Git metadata, and cache files from
+being sent as part of the Docker build context.
+
+The final Docker image size was 1.07 GB both with and without .dockerignore.
+
+This is expected because the multi-stage Dockerfile explicitly copies only
+pyproject.toml and src/ into the builder stage. The excluded directories
+such as data/, tests/, notebooks/, and .venv/ are therefore not included
+in the final runtime image.
+
+Although there was no measurable difference in final image size,
+.dockerignore still reduces the Docker build context and prevents
+unnecessary files from being transferred to the Docker daemon.
+
+5. Security
+-----------
+
+The runtime container runs as the non-root user:
+
+appuser
+
+The model directory is intended to be mounted separately through Docker
+Compose using a read-only volume.
+
+6. Build Commands
+-----------------
+
+Build with .dockerignore:
+
+docker build -f docker/Dockerfile -t prodml-api:with-ignore .
+
+Build without .dockerignore:
+
+docker build -f docker/Dockerfile -t prodml-api:without-ignore .
+
+7. Results
+----------
+
+Both Docker builds completed successfully.
+
+WITH .dockerignore:
+1.07 GB
+
+WITHOUT .dockerignore:
+1.07 GB
+
+Final image-size difference:
+0 GB
+
+
+8. Single-Stage vs Multi-Stage Comparison
+------------------------------------------
+
+Single-stage image:
+Tag: prodml-api:single-stage
+Size: 1.08 GB
+
+Multi-stage image:
+Tag: prodml-api:with-ignore
+Size: 1.07 GB
+
+Size difference:
+Approximately 0.01 GB (~10 MB)
+
+The multi-stage image is slightly smaller than the single-stage image.
+
+The main lesson of multi-stage Docker builds is that build-time dependencies
+and intermediate build artifacts can remain in the builder stage and do not
+need to be included in the final runtime image.
+
+In this project, however, the size reduction is relatively small because the
+application's main dependencies, including the machine-learning stack, are
+required at runtime and therefore must still be present in the final image.
+
+Therefore, multi-stage builds provide a cleaner separation between build and
+runtime environments, but the actual size reduction depends on how many
+build-only dependencies and artifacts are present.

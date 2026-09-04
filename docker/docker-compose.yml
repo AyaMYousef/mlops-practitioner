@@ -1,0 +1,13 @@
+services:
+  api:
+    image: prodml-api:with-ignore
+    container_name: prodml-api
+    environment:
+      PRODML_HOST: 0.0.0.0
+      PRODML_PORT: 8000
+      PRODML_MODEL_FILENAME: baseline.pkl
+    volumes:
+      - ../models:/app/models:ro
+    ports:
+      - "8000:8000"
+    restart: unless-stopped

@@ -1,0 +1,14 @@
+.git
+.venv
+notebooks/
+data/
+tests/
+__pycache__/
+*.ipynb
+
+.pytest_cache/
+.coverage
+.mypy_cache/
+.DS_Store
+*.pyc
+*.pyo
