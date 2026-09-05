@@ -1,0 +1,16 @@
+
+
+### Serialization Format Comparison
+
+| Format       | Human-readable | Cross-language         | Schema-enforced | Safe to load from an untrusted source      |
+| ------------ | -------------- | ---------------------- | --------------- | ------------------------------------------ |
+| **JSON**     | ✅ Yes          | ✅ Yes                  | ❌ No*           | ✅ Yes                                      |
+| **Protobuf** | ❌ No (binary)  | ✅ Yes                  | ✅ Yes           | ✅ Generally yes*                           |
+| **Pickle**   | ❌ No           | ❌ No (Python-specific) | ❌ No            | ❌ **No**                                   |
+| **ONNX**     | ❌ No (binary)  | ✅ Yes                  | ✅ Yes           | ⚠️ **Only with validation/trust controls** |
+
+* JSON can have a schema enforced separately, e.g. JSON Schema. Protobuf uses a defined schema, but applications should still validate untrusted input.
+
+### Service format
+
+> **The service serves the RandomForest model as ONNX because ONNX provides a portable, cross-language model format while avoiding the security risks and Python-specific dependency of loading Pickle models.**

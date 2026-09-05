@@ -1,0 +1,11 @@
+RandomForest Inference Benchmark
+=================================
+
+Rows per inference: 500
+Benchmark runs:     100
+
+Results
+---------------------------------
+Model           Mean (ms)    P95 (ms)
+Pickle RF           13.096      13.779
+ONNX RF              9.494       9.699
