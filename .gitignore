@@ -40,7 +40,7 @@ coverage.xml
 
 # Project data
 data/raw/*
-!data/raw/.gitkeep
+!data/raw/*.dvc
 
 # Generated models
 models/*.pkl
