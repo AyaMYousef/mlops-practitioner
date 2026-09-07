@@ -84,13 +84,19 @@ cd mlops-practitioner
 
 Then follow the **Quick Start** section above.
 
-The project includes the required dataset under:
+The project uses the January 2024 NYC Green Taxi Trip dataset.
+
+Before running the training workflow, download the dataset from the official NYC Taxi & Limousine Commission (TLC) website:
+
+[NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page?utm_source=chatgpt.com)
+
+Under **2024 → January → Green Taxi Trip Records (PARQUET)**, download the dataset and place it at:
 
 ```text
 data/raw/green_tripdata_2024-01.parquet
 ```
 
-so the training workflow can be executed after installing the project.
+The `data/raw/` directory is excluded from version control, so the dataset is **not included in this repository**.
 
 ---
 
