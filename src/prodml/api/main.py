@@ -228,7 +228,7 @@ def metadata():
     "/predict",
     response_model=PredictionResponse,
 )
-def predict(request: PredictionRequest):
+def predict(request: PredictionRequest) -> PredictionResponse | JSONResponse:
     """Predict duration for one trip."""
 
     if predictor is None:
