@@ -1,6 +1,7 @@
 FROM python:3.11-slim AS builder
 
-WORKDIR /build
+WORKDIR /app
+
 
 COPY pyproject.toml ./
 COPY src/ ./src/
@@ -18,7 +19,6 @@ COPY --chown=appuser:appuser models/ /app/models/
 
 WORKDIR /app
 ENV PRODML_PROJECT_ROOT=/app
-
 USER appuser
 
 EXPOSE 8000
