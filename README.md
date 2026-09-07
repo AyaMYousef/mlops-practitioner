@@ -78,7 +78,7 @@ The exact prediction depends on the trained model and dataset.
 Clone the repository and enter the project directory:
 
 ```bash
-git clone <your-repository-url>
+git clone [<your-repository-url>](https://github.com/AyaMYousef/mlops-practitioner.git)
 cd mlops-practitioner
 ```
 
