@@ -15,7 +15,9 @@ RUN useradd --create-home --uid 1000 appuser
 COPY --from=builder /install /usr/local
 COPY --chown=appuser:appuser models/ /app/models/
 
+
 WORKDIR /app
+ENV PRODML_PROJECT_ROOT=/app
 
 USER appuser
 
