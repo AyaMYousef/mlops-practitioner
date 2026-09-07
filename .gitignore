@@ -36,11 +36,6 @@ coverage.xml
 
 # IDEs
 .vscode/
-.idea/
-
-# Project data
-data/raw/*
-!data/raw/.gitkeep
 
 # Generated models
 models/*.pkl
