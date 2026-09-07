@@ -204,7 +204,8 @@ def health():
 @app.get("/metadata")
 def metadata():
     """Return metadata describing the loaded model."""
-
+    
+# will be True when the model predictor has not been successfully loaded.
     if predictor is None:
         return JSONResponse(
             status_code=503,
