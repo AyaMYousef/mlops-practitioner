@@ -33,7 +33,7 @@ models/baseline.pkl
 ### 3. Start the API
 
 ```bash
-uvicorn prodml.api.main:app --host 0.0.0.0 --port 8000
+python -m uvicorn prodml.api.main:app --host 0.0.0.0 --port 8000
 ```
 
 The API is now available at:
