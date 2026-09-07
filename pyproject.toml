@@ -11,7 +11,8 @@ dependencies = [
     "pydantic",
     "pydantic-settings",
     "skl2onnx",
-    "onnx"
+    "onnx",
+    "onnxruntime"
 ]
 [project.optional-dependencies]
 dev = ["pytest","pytest-cov","ruff","black","mypy","httpx","pre-commit"]
