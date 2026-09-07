@@ -31,7 +31,7 @@ def train_model() -> None:
         n_estimators=settings.n_estimators,
         max_depth=settings.max_depth,
         random_state=settings.random_state,
-        n_jobs=-1,
+        n_jobs=settings.n_jobs,
     )
 
     model.fit(X_train, y_train)
