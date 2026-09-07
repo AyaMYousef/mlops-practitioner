@@ -265,15 +265,6 @@ mlops-practitioner/
 ```bash
 pip install -e ".[dev]"
 ```
-
-### Run Tests
-
-```bash
-pytest -v --cov=src/prodml --cov-report=term-missing
-```
-
-The project enforces a minimum test coverage of **70%**.
-
 ### Lint and Format
 
 ```bash
@@ -303,6 +294,14 @@ models/model.onnx
 ```
 
 ---
+
+### Run Tests
+
+```bash
+pytest -v --cov=src/prodml --cov-report=term-missing
+```
+
+The project enforces a minimum test coverage of **70%**.
 
 ## Docker
 
