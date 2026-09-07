@@ -13,6 +13,7 @@ class Settings(BaseSettings):
 
     random_state: int = 42
     n_estimators: int = 100
+    n_jobs: int = -1
     max_depth: int | None = None
 
     test_size: float = 0.2
